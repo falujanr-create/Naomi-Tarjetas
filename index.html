@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página se adapte correctamente al celular -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para ti ❤️</title>
+
+    <style>
+
+        /* =========================
+           CONFIGURACIÓN GENERAL
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #ff758c,
+                #ff7eb3
+            );
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           TARJETA
+        ========================= */
+
+        .tarjeta {
+            width: 100%;
+            max-width: 450px;
+
+            padding: 40px 30px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
+
+            position: relative;
+            z-index: 10;
+
+            animation: aparecer 1s ease;
+        }
+
+
+        /* =========================
+           CORAZÓN
+        ========================= */
+
+        .corazon {
+            font-size: 65px;
+
+            margin-bottom: 15px;
+
+            animation: latido 1.2s infinite;
+        }
+
+
+        /* =========================
+           TÍTULO
+        ========================= */
+
+        h1 {
+            color: #e63963;
+
+            font-size: 32px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           FRASE
+        ========================= */
+
+        #frase {
+            min-height: 100px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 10px;
+
+            font-size: 20px;
+
+            color: #444;
+
+            line-height: 1.5;
+
+            margin-bottom: 25px;
+
+            transition: opacity 0.3s ease;
+        }
+
+
+        /* =========================
+           BOTÓN
+        ========================= */
+
+        button {
+            width: 100%;
+
+            border: none;
+
+            padding: 16px 25px;
+
+            border-radius: 30px;
+
+            background: #e63963;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: transform 0.2s,
+                        background 0.2s;
+        }
+
+
+        button:hover {
+            background: #c92d54;
+
+            transform: scale(1.05);
+        }
+
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+
+        /* =========================
+           CORAZONES FLOTANTES
+        ========================= */
+
+        .corazon-flotante {
+            position: absolute;
+
+            bottom: -50px;
+
+            font-size: 25px;
+
+            animation: subir 4s linear forwards;
+
+            pointer-events: none;
+
+            z-index: 1;
+        }
+
+
+        /* =========================
+           ANIMACIONES
+        ========================= */
+
+        @keyframes latido {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        @keyframes subir {
+
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+
+        }
+
+
+        /* =========================
+           RESPONSIVE - CELULARES
+        ========================= */
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 15px;
+            }
+
+
+            .tarjeta {
+                padding: 30px 20px;
+
+                border-radius: 20px;
+            }
+
+
+            .corazon {
+                font-size: 55px;
+            }
+
+
+            h1 {
+                font-size: 28px;
+            }
+
+
+            #frase {
+                font-size: 18px;
+
+                min-height: 110px;
+            }
+
+
+            button {
+                font-size: 16px;
+
+                padding: 16px;
+            }
+
+        }
+
+
+        /* =========================
+           CELULARES MUY PEQUEÑOS
+        ========================= */
+
+        @media (max-height: 600px) {
+
+            .tarjeta {
+                padding: 20px;
+            }
+
+
+            .corazon {
+                font-size: 45px;
+
+                margin-bottom: 5px;
+            }
+
+
+            h1 {
+                font-size: 25px;
+
+                margin-bottom: 10px;
+            }
+
+
+            #frase {
+                min-height: 80px;
+
+                margin-bottom: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         TARJETA PRINCIPAL
+    ========================= -->
+
+    <div class="tarjeta">
+
+        <div class="corazon">
+            ❤️
+        </div>
+
+
+        <h1>
+            Para ti
+        </h1>
+
+
+        <p id="frase">
+            Presiona el botón... ❤️
+        </p>
+
+
+        <button onclick="mostrarFrase()">
+            Otra frase ❤️
+        </button>
+
+    </div>
+
+
+
+    <script>
+
+        /* =========================
+           FRASES
+        ========================= */
+
+        const frases = [
+
+            "Me encanta pasar tiempo contigo ❤️",
+
+            "Tu sonrisa puede mejorar cualquier día mío.",
+
+            "Todavía me pongo nervioso cuando estoy contigo JAJA.",
+
+            "Me gusta muchísimo la forma en que me haces sentir.",
+
+            "Si pudiera elegir dónde estar ahora, estaría contigo. ❤️",
+
+            "Eres una de mis partes favoritas de mi día.",
+
+            "Me encanta escucharte hablar, incluso cuando dices cualquier cosa JAJA.",
+
+            "Gracias por aparecer en mi vida. ❤️",
+
+            "Contigo hasta los momentos más simples se sienten especiales.",
+
+            "Me gusta tenerte en mi vida más de lo que imaginas.",
+
+            "No necesito una razón especial para quererte, simplemente me nace. ❤️",
+
+            "Espero poder crear muchos más recuerdos contigo.",
+
+            "A veces te miro y pienso: qué suerte la mía. ❤️",
+
+            "Me haces sonreír incluso cuando no estás conmigo.",
+
+            "Y por si todavía no quedó claro... me encantas. ❤️"
+
+        ];
+
+
+        /* =========================
+           VARIABLES
+        ========================= */
+
+        let frasesDisponibles = [...frases];
+
+
+        /* =========================
+           MOSTRAR FRASE
+        ========================= */
+
+        function mostrarFrase() {
+
+            const elementoFrase =
+                document.getElementById("frase");
+
+
+            /* Si ya mostramos todas,
+               volvemos a cargar las frases */
+
+            if (frasesDisponibles.length === 0) {
+
+                frasesDisponibles = [...frases];
+
+            }
+
+
+            /* Elegimos una posición
+               aleatoria */
+
+            const posicion =
+                Math.floor(
+                    Math.random() *
+                    frasesDisponibles.length
+                );
+
+
+            /* Obtenemos la frase */
+
+            const frase =
+                frasesDisponibles[posicion];
+
+
+            /* La eliminamos para
+               evitar repetirla */
+
+            frasesDisponibles.splice(
+                posicion,
+                1
+            );
+
+
+            /* Animación de salida */
+
+            elementoFrase.style.opacity = 0;
+
+
+            setTimeout(() => {
+
+                elementoFrase.textContent =
+                    frase;
+
+                elementoFrase.style.opacity = 1;
+
+            }, 200);
+
+
+            /* Crear corazones */
+
+            crearCorazon();
+
+        }
+
+
+
+        /* =========================
+           CREAR CORAZÓN
+        ========================= */
+
+        function crearCorazon() {
+
+            const corazon =
+                document.createElement("div");
+
+
+            corazon.classList.add(
+                "corazon-flotante"
+            );
+
+
+            corazon.textContent = "❤️";
+
+
+            /* Posición horizontal aleatoria */
+
+            corazon.style.left =
+                Math.random() * 100 + "vw";
+
+
+            /* Tamaño aleatorio */
+
+            const tamaño =
+                Math.random() * 20 + 15;
+
+
+            corazon.style.fontSize =
+                tamaño + "px";
+
+
+            /* Duración aleatoria */
+
+            const duracion =
+                Math.random() * 2 + 3;
+
+
+            corazon.style.animationDuration =
+                duracion + "s";
+
+
+            /* Lo agregamos a la página */
+
+            document.body.appendChild(
+                corazon
+            );
+
+
+            /* Lo eliminamos después */
+
+            setTimeout(() => {
+
+                corazon.remove();
+
+            }, duracion * 1000);
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
+
